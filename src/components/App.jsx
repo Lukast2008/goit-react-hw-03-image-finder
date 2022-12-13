@@ -57,7 +57,6 @@ export class App extends Component {
   };
 
   closeModal = () => {
-    console.log("What")
     this.setState({ largeImageURL: null });
   };
 

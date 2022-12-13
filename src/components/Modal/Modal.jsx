@@ -5,7 +5,6 @@ export class Modal extends Component {
   closeOnPushEsc = ev => {
     if (ev.code === 'Escape') {  
       this.props.closeModal()
-      console.log("ha")
     }
   };
 
