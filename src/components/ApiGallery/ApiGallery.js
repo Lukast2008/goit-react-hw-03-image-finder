@@ -8,6 +8,5 @@ export async function GetDataArr(search, page) {
   const res = await axios.get(
     `${BaseUrl}?key=${APIkey}&q=${search}&mage_type=photo&orientation=horizontal&safesearch=true&per_page=${per_page}&page=${page}`
   );
-  console.log(res.data.hits);
   return res.data.hits;
 }
