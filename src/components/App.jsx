@@ -4,7 +4,7 @@ import { ImageGallery } from './ImageGallery/ImageGallery';
 import { Button } from './Button/Button';
 import { Loader } from './Loader/Loader';
 import { Modal } from './Modal/Modal';
-import { GetDataArr } from './ApiGallery/ApiGallery';
+import { GetDataArr } from '../ApiGallery/ApiGallery';
 
 export class App extends Component {
   state = {
@@ -15,15 +15,13 @@ export class App extends Component {
     isLoading: false,
     error: null,
     largeImageURL: '',
+    buttonVisible: false
   };
 
   componentDidUpdate(prevState) {
     if (this.state.showGallery && this.state.searchItems) {
       this.getData();
       this.setState(() => ({ showGallery: false }));
-      setTimeout(() => {
-        this.setState({ isLoading: false });
-      }, 1000);
     }
   }
 
@@ -31,19 +29,28 @@ export class App extends Component {
     const search = this.state.searchItems;
     const page = this.state.page;
     this.setState({ isLoading: true });
-    GetDataArr(search, page)
+     GetDataArr(search, page)
       .then(data => {
         this.setState({ dataArr: data });
       })
-      .catch(console.log);
+      .catch(console.log)
+      .finally(this.setState({ isLoading: false ,buttonVisible: true }), );
   };
 
   loadMore = () => {
-    this.setState({ isLoading: true });
-    this.setState(prevState => ({
-      showGallery: true,
-      page: prevState.page + 1,
-    }));
+
+    const search = this.state.searchItems;
+    const page = this.state.page;
+    GetDataArr(search, page)
+      .then(data => {
+        this.setState( prevState =>({ dataArr: [...prevState.dataArr ,...data], page: prevState.page + 1,}));
+      })
+      .catch(console.log) 
+     .finally(this.setState({ isLoading: false ,buttonVisible: true }), );
+
+
+
+
   };
 
   onSubmit = ({ val }) => {
@@ -58,6 +65,8 @@ export class App extends Component {
     this.setState({ largeImageURL: null });
   };
 
+ 
+
   render() {
     return (
       <div>
@@ -67,7 +76,10 @@ export class App extends Component {
           largeImage={this.state.largeImageURL}
           openModal={this.openModal}
         />
-        <Button text="Load more" handleClickMore={this.loadMore} />
+        {this.state.buttonVisible ? (
+          <Button text="Load more" handleClickMore={this.loadMore} />
+        ) : null}
+
         <Loader loud={this.state.isLoading} />
         {this.state.largeImageURL && (
           <Modal
