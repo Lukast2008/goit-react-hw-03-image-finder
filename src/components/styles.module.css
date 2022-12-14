@@ -86,7 +86,7 @@ img {
   outline: none;
 }
 
-.searchFormbutton:hover {
+.searchFormButton:hover {
   opacity: 1;
 }
 
@@ -197,15 +197,17 @@ img {
     0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
 }
 
-.Button:hover,
-.Button:focus {
+.button:hover,
+.button:focus {
   background-color: #303f9f;
 }
 
 .louder {
   position: absolute;
-  top: 50%;
+
   z-index: 100;
   width: 80px;
+  /* top: 50%; */
+  top: calc(100% / 2);
   left: calc((100% - 80px) / 2);
 }

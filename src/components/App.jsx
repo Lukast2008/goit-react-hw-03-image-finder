@@ -47,7 +47,6 @@ export class App extends Component {
   };
 
   onSubmit = ({ val }) => {
-
     this.setState(() => ({ showGallery: true, searchItems: val, page: 1 }));
   };
 
@@ -62,12 +61,7 @@ export class App extends Component {
   render() {
     return (
       <div>
-        <SearchBar
-          onsubmit={this.onSubmit}
-          onchange={this.state.searchItems}
-          // page={this.state.page}
-        />
-        {/* <GetDataArr searchItems={this.state.searchItems }page={this.state.page}  /> */}
+        <SearchBar onsubmit={this.onSubmit} />
         <ImageGallery
           gallery={this.state.dataArr}
           largeImage={this.state.largeImageURL}

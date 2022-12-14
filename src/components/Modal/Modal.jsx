@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import PropTypes from 'prop-types';
 import styles from '../styles.module.css';
 
 export class Modal extends Component {
@@ -18,16 +19,19 @@ export class Modal extends Component {
 
   render() {
     const {
-      // closeModal,
+      closeModal,
       largeImage: { src, alt },
     } = this.props;
     return (
       <div  className={styles.overlay}>
-        <img  className={styles.modal} src={src} alt={alt} />
-        {/* <button type="button" onClick={closeModal}> */}
-          {/* Close
-        </button> */}
+        <img  className={styles.modal} src={src} alt={alt}  onClick={closeModal}/>
+    
       </div>
     );
   }
+}
+
+Modal.propTypes = {
+  largeImage: PropTypes.shape().isRequired,
+  closeModal: PropTypes.func.isRequired
 }
