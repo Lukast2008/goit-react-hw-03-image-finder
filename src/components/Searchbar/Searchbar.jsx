@@ -3,7 +3,6 @@ import styles from '../styles.module.css';
 
 import PropTypes from 'prop-types';
 
-
 export class SearchBar extends Component {
   state = {
     val: '',
@@ -23,27 +22,23 @@ export class SearchBar extends Component {
   clearInput = () => {
     this.setState({ val: '' });
   };
-  
 
   render() {
     return (
       <header className={styles.searchBar}>
         <form className={styles.searchForm} onSubmit={this.handleSubmit}>
           <button type="submit" className={styles.searchFormButton}>
-            <span  className={styles.searchFormButtonLabel}>Search</span>
+            <span className={styles.searchFormButtonLabel}>Search</span>
           </button>
-          
+
           <input
-    
             className={styles.searchFormInput}
             type="text"
-            
             placeholder="Search images and photos"
             name="search"
             value={this.state.val}
             onChange={this.handleOnChange}
           />
-          
         </form>
       </header>
     );
@@ -52,6 +47,4 @@ export class SearchBar extends Component {
 
 SearchBar.propTypes = {
   onsubmit: PropTypes.func.isRequired,
-  
-  
-}
+};

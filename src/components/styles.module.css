@@ -149,7 +149,7 @@ img {
   transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.imageGalleryItemimage:hover {
+.imageGalleryItemImage:hover {
   transform: scale(1.03);
   cursor: zoom-in;
 }
@@ -208,6 +208,6 @@ img {
   z-index: 100;
   width: 80px;
   /* top: 50%; */
-  top: calc(100% / 2);
+  top: calc(100vh / 2);
   left: calc((100% - 80px) / 2);
 }
