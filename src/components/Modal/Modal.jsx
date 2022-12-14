@@ -22,8 +22,8 @@ export class Modal extends Component {
       largeImage: { src, alt },
     } = this.props;
     return (
-      <div  className={styles.Overlay}>
-        <img  className={styles.Modal} src={src} alt={alt} />
+      <div  className={styles.overlay}>
+        <img  className={styles.modal} src={src} alt={alt} />
         {/* <button type="button" onClick={closeModal}> */}
           {/* Close
         </button> */}

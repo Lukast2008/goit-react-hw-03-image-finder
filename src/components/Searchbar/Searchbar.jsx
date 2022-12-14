@@ -1,14 +1,14 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 import styles from '../styles.module.css';
-import { nanoid } from "nanoid";
+
 
 export class SearchBar extends Component {
   state = {
-    value: '',
+    val: '',
   };
 
   handleOnChange = ev => {
-    this.setState({ value: ev.target.value });
+    this.setState({ val: ev.target.value });
   };
 
   handleSubmit = ev => {
@@ -19,26 +19,30 @@ export class SearchBar extends Component {
   };
 
   clearInput = () => {
-    this.setState({ value: '' });
+    this.setState({ val: '' });
   };
+  
 
   render() {
     return (
-      <header className={styles.Searchbar}>
-        <form className={styles.SearchForm} onSubmit={this.handleSubmit}>
-          <button type="submit" className={styles.SearchFormbutton}>
-            <span className={styles.SearchFormbuttonlabel}>Search</span>
+      <header className={styles.searchBar}>
+        <form className={styles.searchForm} onSubmit={this.handleSubmit}>
+          <button type="submit" className={styles.searchFormButton}>
+            <span  className={styles.searchFormButtonLabel}>Search</span>
           </button>
-
+          
           <input
-            key={nanoid()}
-            className={styles.SearchForminput}
+    
+            className={styles.searchFormInput}
             type="text"
+            // autocomplete="on"
+            // autofocus
             placeholder="Search images and photos"
-            name="onchange"
-            value={this.state.value}
+            name="search"
+            value={this.state.val}
             onChange={this.handleOnChange}
           />
+          
         </form>
       </header>
     );

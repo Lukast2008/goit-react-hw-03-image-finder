@@ -1,5 +1,4 @@
 import { Component } from 'react';
-
 import { SearchBar } from './Searchbar/Searchbar';
 import { ImageGallery } from './ImageGallery/ImageGallery';
 import { Button } from './Button/Button';
@@ -18,38 +17,38 @@ export class App extends Component {
     largeImageURL: '',
   };
 
-
-
   componentDidUpdate(prevState) {
-    if (this.state.showGallery) {
+    if (this.state.showGallery && this.state.searchItems) {
       this.getData();
       this.setState(() => ({ showGallery: false }));
+      setTimeout(() => {
+        this.setState({ isLoading: false });
+      }, 1000);
     }
   }
 
   getData = () => {
+    const search = this.state.searchItems;
+    const page = this.state.page;
     this.setState({ isLoading: true });
-    const fir = this.state.searchItems;
-    const sec = this.state.page;
-
-    GetDataArr(fir, sec)
+    GetDataArr(search, page)
       .then(data => {
         this.setState({ dataArr: data });
       })
-      .catch(console.log)
-      .finally(this.setState({ isLoading: false }));
+      .catch(console.log);
   };
 
-  // data.hits
   loadMore = () => {
+    this.setState({ isLoading: true });
     this.setState(prevState => ({
       showGallery: true,
       page: prevState.page + 1,
     }));
   };
 
-  onSubmit = ({ value }) => {
-    this.setState(() => ({ showGallery: true, searchItems: value, page: 1 }));
+  onSubmit = ({ val }) => {
+
+    this.setState(() => ({ showGallery: true, searchItems: val, page: 1 }));
   };
 
   openModal = data => {
@@ -77,7 +76,10 @@ export class App extends Component {
         <Button text="Load more" handleClickMore={this.loadMore} />
         <Loader loud={this.state.isLoading} />
         {this.state.largeImageURL && (
-          <Modal largeImage={this.state.largeImageURL} closeModal={this.closeModal} />
+          <Modal
+            largeImage={this.state.largeImageURL}
+            closeModal={this.closeModal}
+          />
         )}
       </div>
     );
