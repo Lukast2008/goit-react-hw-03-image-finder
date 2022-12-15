@@ -29,7 +29,7 @@ img {
 /*
  * Стили компонента App
  */
-.App {
+.app {
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: 16px;
@@ -203,11 +203,14 @@ img {
 }
 
 .louder {
-  position: absolute;
-
-  z-index: 100;
-  width: 80px;
-  /* top: 50%; */
-  top: calc(100vh / 2);
-  left: calc((100% - 80px) / 2);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 4000;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.457);
 }

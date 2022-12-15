@@ -15,7 +15,7 @@ export class App extends Component {
     isLoading: false,
     error: null,
     largeImageURL: '',
-    buttonVisible: false
+    buttonVisible: false,
   };
 
   componentDidUpdate(prevState) {
@@ -29,28 +29,26 @@ export class App extends Component {
     const search = this.state.searchItems;
     const page = this.state.page;
     this.setState({ isLoading: true });
-     GetDataArr(search, page)
+    GetDataArr(search, page)
       .then(data => {
         this.setState({ dataArr: data });
+        data && this.setState({ isLoading: false, buttonVisible: true });
       })
-      .catch(console.log)
-      .finally(this.setState({ isLoading: false ,buttonVisible: true }), );
+      .catch(console.log);
+    // .finally(data =>  );
   };
 
   loadMore = () => {
-
     const search = this.state.searchItems;
     const page = this.state.page;
+    this.setState({ isLoading: true})
     GetDataArr(search, page)
       .then(data => {
-        this.setState( prevState =>({ dataArr: [...prevState.dataArr ,...data], page: prevState.page + 1,}));
+        this.setState(prevState => ({dataArr: [...prevState.dataArr, ...data],page: prevState.page + 1}));
+        data && this.setState({ isLoading: false, buttonVisible: true })
+        
       })
-      .catch(console.log) 
-     .finally(this.setState({ isLoading: false ,buttonVisible: true }), );
-
-
-
-
+      .catch(console.log);
   };
 
   onSubmit = ({ val }) => {
@@ -64,8 +62,6 @@ export class App extends Component {
   closeModal = () => {
     this.setState({ largeImageURL: null });
   };
-
- 
 
   render() {
     return (
