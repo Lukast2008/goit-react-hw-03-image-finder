@@ -32,21 +32,24 @@ export class App extends Component {
     GetDataArr(search, page)
       .then(data => {
         this.setState({ dataArr: data });
-        data && this.setState({ isLoading: false, buttonVisible: true });
+        data && this.setState({ isLoading: false  });
+         this.setState(data.length === 12 ? {buttonVisible: true}  :{buttonVisible: false})
       })
       .catch(console.log);
-    // .finally(data =>  );
   };
 
   loadMore = () => {
     const search = this.state.searchItems;
     const page = this.state.page;
-    this.setState({ isLoading: true})
+    this.setState({ isLoading: true });
     GetDataArr(search, page)
       .then(data => {
-        this.setState(prevState => ({dataArr: [...prevState.dataArr, ...data],page: prevState.page + 1}));
-        data && this.setState({ isLoading: false, buttonVisible: true })
-        
+        this.setState(prevState => ({
+          dataArr: [...prevState.dataArr, ...data],
+          page: prevState.page + 1,
+        }));
+        data && this.setState({ isLoading: false});
+         this.setState(data.length === 12 ? {buttonVisible: true}  :{buttonVisible: false})
       })
       .catch(console.log);
   };
