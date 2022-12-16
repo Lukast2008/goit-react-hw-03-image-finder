@@ -3,7 +3,7 @@ import styles from '../styles.module.css';
 
 export const ImageGalleryItem = ({ gallerylistItem, openModal }) => {
   return gallerylistItem.map(({ id, webformatURL, tags, largeImageURL }) => (
-    <li id={id} className={styles.imageGalleryItem}>
+    <li key={id} id={id} className={styles.imageGalleryItem}>
       <img
         className={styles.imageGalleryItemImage}
         id={id}
